@@ -49,8 +49,39 @@ namespace Scheduller
 
         private void transformButton_Click(object sender, EventArgs e)
         {
+            /*ITransform movMerging = new MovMergingTransform();
+            movMerging.Transform(inputCode);*/
+
             ITransform movMerging = new MovMergingTransform();
-            movMerging.Transform(inputCode);
+            string[] transformedCode = movMerging.Transform(inputCode);
+
+            string newInstruction = "Noua instructiune";
+           
+            List<string> modifiedCodeList = new List<string>(transformedCode);
+            modifiedCodeList.Add(newInstruction);
+
+            inputCode = modifiedCodeList.ToArray();
+            
+            outputTextBox.Lines = inputCode;
+
+            if (red.Checked)
+            {
+                SetColorForNewInstruction(newInstruction, Color.Red);
+            }else if(green.Checked)
+            {
+                SetColorForNewInstruction(newInstruction, Color.DarkGreen);
+            }else if(blue.Checked)
+            {
+                SetColorForNewInstruction(newInstruction, Color.DarkBlue);
+            }
+        }
+        private void SetColorForNewInstruction(string instruction, Color color)
+        {
+            int startIndex = outputTextBox.Text.Length - instruction.Length;
+
+            outputTextBox.SelectionStart = startIndex;
+            outputTextBox.SelectionLength = instruction.Length;
+            outputTextBox.SelectionColor = color;
         }
     }
 }
