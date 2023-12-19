@@ -49,10 +49,21 @@ namespace Scheduller
 
         private void transformButton_Click(object sender, EventArgs e)
         {
-            ITransform movMerging = new MovMergingTransform();
-            movMerging.Transform(inputCode);
+            string[] codeCopy = inputCode.ToArray();
 
-            outputTextBox.Lines = inputCode;
+            if (movMergingCheck.Checked)
+            {
+                ITransform movMerging = new MovMergingTransform();
+                movMerging.Transform(codeCopy);
+            }
+
+            if(movReabsorptionCheck.Checked)
+            {
+                ITransform movReabsortion = new MovReabsorptionTransform();
+                movReabsortion.Transform(codeCopy);
+            }
+
+            outputTextBox.Lines = codeCopy;
 
             /*ITransform movMerging = new MovMergingTransform();
             string[] transformedCode = movMerging.Transform(inputCode);

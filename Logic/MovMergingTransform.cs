@@ -42,12 +42,12 @@ namespace Scheduller.Logic
 
         private void CheckRelationalInstruction(string[] inputCode, int index)
         {
-            if (IsCertainInstruction(inputCode[index], "MOV"))
+            if (Utils.IsCertainInstruction(inputCode[index], "MOV"))
             {
                 if (index + 1 < inputCode.Length && IsRelationalInstruction(inputCode[index + 1]))
                 {
-                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index]);
-                    List<string> relationalParts = ExtractInstructionWithOperands(inputCode[index + 1]);
+                    List<string> movParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> relationalParts = Utils.ExtractInstructionWithOperands(inputCode[index + 1]);
 
                     if (movParts[1] == relationalParts[2] || movParts[1] == relationalParts[3])
                     {
@@ -65,12 +65,12 @@ namespace Scheduller.Logic
 
         private void CheckStoreInstruction(string[] inputCode, int index)
         {
-            if (IsCertainInstruction(inputCode[index], "ST"))
+            if (Utils.IsCertainInstruction(inputCode[index], "ST"))
             {
-                if (index >= 1 && IsCertainInstruction(inputCode[index - 1], "MOV"))
+                if (index >= 1 && Utils.IsCertainInstruction(inputCode[index - 1], "MOV"))
                 {
-                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index - 1]);
-                    List<string> storeParts = ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> movParts = Utils.ExtractInstructionWithOperands(inputCode[index - 1]);
+                    List<string> storeParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
 
                     if ((storeParts.Count == 5 && movParts[1] == storeParts[3]) || 
                         (storeParts.Count == 4 && movParts[1] == storeParts[2]))
@@ -109,12 +109,12 @@ namespace Scheduller.Logic
 
         private void CheckAddInstruction(string[] inputCode, int index)
         {
-            if (IsCertainInstruction(inputCode[index], "ADD"))
+            if (Utils.IsCertainInstruction(inputCode[index], "ADD"))
             {
-                if (index >= 1 && IsCertainInstruction(inputCode[index - 1], "MOV"))
+                if (index >= 1 && Utils.IsCertainInstruction(inputCode[index - 1], "MOV"))
                 {
-                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index - 1]);
-                    List<string> addParts = ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> movParts = Utils.ExtractInstructionWithOperands(inputCode[index - 1]);
+                    List<string> addParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
 
                     if (movParts[1] == addParts[2] || movParts[1] == addParts[3])
                     {
@@ -146,11 +146,6 @@ namespace Scheduller.Logic
             return returnInstruction;
         }
 
-        private bool IsCertainInstruction(string instruction, string instructionName)
-        {
-            return instruction.Trim().StartsWith(instructionName, StringComparison.OrdinalIgnoreCase);
-        }
-
         private bool IsRelationalInstruction(string instruction)
         {
             string[] relationalInstructionsName = new string[] { "GT", "LTE", "LT", "GTE" };
@@ -163,13 +158,6 @@ namespace Scheduller.Logic
             }
             
             return false;
-        }
-
-        static List<string> ExtractInstructionWithOperands(string instruction)
-        {
-            string[] parts = instruction.Split();
-            List<string> operands = parts.Skip(1).Select(operand => operand.TrimEnd(',')).ToList();
-            return operands;
         }
     }
 }

@@ -33,9 +33,9 @@
             this.inputTextBox = new System.Windows.Forms.RichTextBox();
             this.outputTextBox = new System.Windows.Forms.RichTextBox();
             this.transformButton = new System.Windows.Forms.Button();
-            this.red = new System.Windows.Forms.CheckBox();
-            this.green = new System.Windows.Forms.CheckBox();
-            this.blue = new System.Windows.Forms.CheckBox();
+            this.movMergingCheck = new System.Windows.Forms.CheckBox();
+            this.immediateMerging = new System.Windows.Forms.CheckBox();
+            this.movReabsorptionCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -44,10 +44,10 @@
             // 
             // addFile
             // 
-            this.addFile.Location = new System.Drawing.Point(23, 471);
-            this.addFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addFile.Location = new System.Drawing.Point(31, 580);
+            this.addFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addFile.Name = "addFile";
-            this.addFile.Size = new System.Drawing.Size(102, 26);
+            this.addFile.Size = new System.Drawing.Size(136, 32);
             this.addFile.TabIndex = 0;
             this.addFile.Text = "Add File";
             this.addFile.UseVisualStyleBackColor = true;
@@ -55,78 +55,81 @@
             // 
             // inputTextBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(23, 24);
-            this.inputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputTextBox.Location = new System.Drawing.Point(31, 30);
+            this.inputTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.ReadOnly = true;
-            this.inputTextBox.Size = new System.Drawing.Size(341, 429);
+            this.inputTextBox.Size = new System.Drawing.Size(453, 527);
             this.inputTextBox.TabIndex = 1;
             this.inputTextBox.Text = "";
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(400, 24);
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outputTextBox.Location = new System.Drawing.Point(533, 30);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.Size = new System.Drawing.Size(336, 429);
+            this.outputTextBox.Size = new System.Drawing.Size(447, 527);
             this.outputTextBox.TabIndex = 2;
             this.outputTextBox.Text = "";
             // 
             // transformButton
             // 
-            this.transformButton.Location = new System.Drawing.Point(138, 471);
-            this.transformButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.transformButton.Location = new System.Drawing.Point(184, 580);
+            this.transformButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.transformButton.Name = "transformButton";
-            this.transformButton.Size = new System.Drawing.Size(102, 26);
+            this.transformButton.Size = new System.Drawing.Size(136, 32);
             this.transformButton.TabIndex = 3;
             this.transformButton.Text = "Transform";
             this.transformButton.UseVisualStyleBackColor = true;
             this.transformButton.Click += new System.EventHandler(this.transformButton_Click);
             // 
-            // red
+            // movMergingCheck
             // 
-            this.red.AutoSize = true;
-            this.red.Location = new System.Drawing.Point(471, 477);
-            this.red.Name = "red";
-            this.red.Size = new System.Drawing.Size(46, 17);
-            this.red.TabIndex = 4;
-            this.red.Text = "Red";
-            this.red.UseVisualStyleBackColor = true;
+            this.movMergingCheck.AutoSize = true;
+            this.movMergingCheck.Location = new System.Drawing.Point(570, 587);
+            this.movMergingCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.movMergingCheck.Name = "movMergingCheck";
+            this.movMergingCheck.Size = new System.Drawing.Size(107, 20);
+            this.movMergingCheck.TabIndex = 4;
+            this.movMergingCheck.Text = "Mov Merging";
+            this.movMergingCheck.UseVisualStyleBackColor = true;
             // 
-            // green
+            // immediateMerging
             // 
-            this.green.AutoSize = true;
-            this.green.Location = new System.Drawing.Point(523, 477);
-            this.green.Name = "green";
-            this.green.Size = new System.Drawing.Size(55, 17);
-            this.green.TabIndex = 5;
-            this.green.Text = "Green";
-            this.green.UseVisualStyleBackColor = true;
+            this.immediateMerging.AutoSize = true;
+            this.immediateMerging.Location = new System.Drawing.Point(685, 587);
+            this.immediateMerging.Margin = new System.Windows.Forms.Padding(4);
+            this.immediateMerging.Name = "immediateMerging";
+            this.immediateMerging.Size = new System.Drawing.Size(144, 20);
+            this.immediateMerging.TabIndex = 5;
+            this.immediateMerging.Text = "Immediate Merging";
+            this.immediateMerging.UseVisualStyleBackColor = true;
             // 
-            // blue
+            // movReabsorptionCheck
             // 
-            this.blue.AutoSize = true;
-            this.blue.Location = new System.Drawing.Point(584, 477);
-            this.blue.Name = "blue";
-            this.blue.Size = new System.Drawing.Size(47, 17);
-            this.blue.TabIndex = 6;
-            this.blue.Text = "Blue";
-            this.blue.UseVisualStyleBackColor = true;
+            this.movReabsorptionCheck.AutoSize = true;
+            this.movReabsorptionCheck.Location = new System.Drawing.Point(837, 587);
+            this.movReabsorptionCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.movReabsorptionCheck.Name = "movReabsorptionCheck";
+            this.movReabsorptionCheck.Size = new System.Drawing.Size(140, 20);
+            this.movReabsorptionCheck.TabIndex = 6;
+            this.movReabsorptionCheck.Text = "Mov Reabsorption";
+            this.movReabsorptionCheck.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 522);
-            this.Controls.Add(this.blue);
-            this.Controls.Add(this.green);
-            this.Controls.Add(this.red);
+            this.ClientSize = new System.Drawing.Size(1019, 642);
+            this.Controls.Add(this.movReabsorptionCheck);
+            this.Controls.Add(this.immediateMerging);
+            this.Controls.Add(this.movMergingCheck);
             this.Controls.Add(this.transformButton);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.addFile);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Scheduller";
             this.ResumeLayout(false);
@@ -141,9 +144,9 @@
         private System.Windows.Forms.RichTextBox inputTextBox;
         private System.Windows.Forms.RichTextBox outputTextBox;
         private System.Windows.Forms.Button transformButton;
-        private System.Windows.Forms.CheckBox red;
-        private System.Windows.Forms.CheckBox green;
-        private System.Windows.Forms.CheckBox blue;
+        private System.Windows.Forms.CheckBox movMergingCheck;
+        private System.Windows.Forms.CheckBox immediateMerging;
+        private System.Windows.Forms.CheckBox movReabsorptionCheck;
     }
 }
 
