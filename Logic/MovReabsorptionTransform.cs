@@ -18,7 +18,7 @@ namespace Scheduller.Logic
                     List<string> movParts = Utils.ExtractInstructionWithOperands(inputCode[i]);
                     List<string> beforeInstrParts = Utils.ExtractInstructionWithOperands(inputCode[i-1]);
 
-                    if (movParts[2] == beforeInstrParts[1])
+                    if (beforeInstrParts.Count > 1 && movParts[2] == beforeInstrParts[1])
                     {
                         inputCode[i] = "~~~" + inputCode[i - 1];
                     }

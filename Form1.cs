@@ -57,7 +57,13 @@ namespace Scheduller
                 movMerging.Transform(codeCopy);
             }
 
-            if(movReabsorptionCheck.Checked)
+            if (immediateMergingCheck.Checked)
+            {
+                ITransform movReabsortion = new ImmediateMergingTransform();
+                movReabsortion.Transform(codeCopy);
+            }
+
+            if (movReabsorptionCheck.Checked)
             {
                 ITransform movReabsortion = new MovReabsorptionTransform();
                 movReabsortion.Transform(codeCopy);

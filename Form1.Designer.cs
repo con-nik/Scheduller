@@ -34,7 +34,7 @@
             this.outputTextBox = new System.Windows.Forms.RichTextBox();
             this.transformButton = new System.Windows.Forms.Button();
             this.movMergingCheck = new System.Windows.Forms.CheckBox();
-            this.immediateMerging = new System.Windows.Forms.CheckBox();
+            this.immediateMergingCheck = new System.Windows.Forms.CheckBox();
             this.movReabsorptionCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -95,16 +95,16 @@
             this.movMergingCheck.Text = "Mov Merging";
             this.movMergingCheck.UseVisualStyleBackColor = true;
             // 
-            // immediateMerging
+            // immediateMergingCheck
             // 
-            this.immediateMerging.AutoSize = true;
-            this.immediateMerging.Location = new System.Drawing.Point(685, 587);
-            this.immediateMerging.Margin = new System.Windows.Forms.Padding(4);
-            this.immediateMerging.Name = "immediateMerging";
-            this.immediateMerging.Size = new System.Drawing.Size(144, 20);
-            this.immediateMerging.TabIndex = 5;
-            this.immediateMerging.Text = "Immediate Merging";
-            this.immediateMerging.UseVisualStyleBackColor = true;
+            this.immediateMergingCheck.AutoSize = true;
+            this.immediateMergingCheck.Location = new System.Drawing.Point(685, 587);
+            this.immediateMergingCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.immediateMergingCheck.Name = "immediateMergingCheck";
+            this.immediateMergingCheck.Size = new System.Drawing.Size(144, 20);
+            this.immediateMergingCheck.TabIndex = 5;
+            this.immediateMergingCheck.Text = "Immediate Merging";
+            this.immediateMergingCheck.UseVisualStyleBackColor = true;
             // 
             // movReabsorptionCheck
             // 
@@ -123,7 +123,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 642);
             this.Controls.Add(this.movReabsorptionCheck);
-            this.Controls.Add(this.immediateMerging);
+            this.Controls.Add(this.immediateMergingCheck);
             this.Controls.Add(this.movMergingCheck);
             this.Controls.Add(this.transformButton);
             this.Controls.Add(this.outputTextBox);
@@ -145,7 +145,7 @@
         private System.Windows.Forms.RichTextBox outputTextBox;
         private System.Windows.Forms.Button transformButton;
         private System.Windows.Forms.CheckBox movMergingCheck;
-        private System.Windows.Forms.CheckBox immediateMerging;
+        private System.Windows.Forms.CheckBox immediateMergingCheck;
         private System.Windows.Forms.CheckBox movReabsorptionCheck;
     }
 }

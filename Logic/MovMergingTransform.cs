@@ -148,7 +148,7 @@ namespace Scheduller.Logic
 
         private bool IsRelationalInstruction(string instruction)
         {
-            string[] relationalInstructionsName = new string[] { "GT", "LTE", "LT", "GTE" };
+            string[] relationalInstructionsName = new string[] { "GT ", "LTE ", "LT ", "GTE " };
             foreach (var relationalInstruction in relationalInstructionsName)
             {
                 if(instruction.Trim().StartsWith(relationalInstruction, StringComparison.OrdinalIgnoreCase))
