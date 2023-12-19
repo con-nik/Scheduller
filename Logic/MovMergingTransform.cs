@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,6 +10,18 @@ namespace Scheduller.Logic
 {
     internal class MovMergingTransform : ITransform
     {
+        private readonly Dictionary<string, string> relationalValues;
+        public MovMergingTransform()
+        {
+            relationalValues = new Dictionary<string, string>
+            {
+                { "GT", "LTE" },
+                { "LTE", "GT" },
+                { "LT", "GTE"},
+                { "GTE", "LT"},
+            };
+        }
+
         public string[] Transform(string[] inputCode)
         {
             for (int i = 0; i < inputCode.Length; i++)
@@ -27,14 +40,71 @@ namespace Scheduller.Logic
             return;
         }
 
-        private void CheckRelationalInstruction(string[] inputCode, int i)
+        private void CheckRelationalInstruction(string[] inputCode, int index)
         {
-            return;
+            if (IsCertainInstruction(inputCode[index], "MOV"))
+            {
+                if (index + 1 < inputCode.Length && IsRelationalInstruction(inputCode[index + 1]))
+                {
+                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> relationalParts = ExtractInstructionWithOperands(inputCode[index + 1]);
+
+                    if (movParts[1] == relationalParts[2] || movParts[1] == relationalParts[3])
+                    {
+                        string newInstruction = GetNewInstructionRelational(movParts, relationalParts);
+                        inputCode[index + 1] = newInstruction;
+                    }
+                }
+            }
         }
 
-        private void CheckStoreInstruction(string[] inputCode, int i)
+        private string GetNewInstructionRelational(List<string> movParts, List<string> relationalParts)
         {
-            return;
+            return $"~\t{relationalValues[relationalParts[0]]} {relationalParts[1]}, {relationalParts[3]}, {movParts[2]}";
+        }
+
+        private void CheckStoreInstruction(string[] inputCode, int index)
+        {
+            if (IsCertainInstruction(inputCode[index], "ST"))
+            {
+                if (index >= 1 && IsCertainInstruction(inputCode[index - 1], "MOV"))
+                {
+                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index - 1]);
+                    List<string> storeParts = ExtractInstructionWithOperands(inputCode[index]);
+
+                    if ((storeParts.Count == 5 && movParts[1] == storeParts[3]) || 
+                        (storeParts.Count == 4 && movParts[1] == storeParts[2]))
+                    {
+                        string newInstruction = GetNewInstructionStore(movParts, storeParts);
+                        inputCode[index] = newInstruction;
+                    }
+                }
+            }
+        }
+
+        private string GetNewInstructionStore(List<string> movParts, List<string> storeParts)
+        {
+            string hashtagNumberPattern = @"#(\d+)";
+            Regex hashtagRegex = new Regex(hashtagNumberPattern);
+
+            Match match1 = hashtagRegex.Match(movParts[2]);
+
+            string returnInstruction = storeParts.Count == 5 ? 
+                $"ST {storeParts[1]} {storeParts[2]} {storeParts[3]}" :
+                $"ST {storeParts[1]} {storeParts[2]}";
+
+            if (match1.Success &&
+                int.TryParse(match1.Groups[1].Value, out int number1))
+            {
+                if (number1 == 0)
+                {
+                    returnInstruction = storeParts.Count == 5 ?
+                        $"~\tST {storeParts[1]}, {storeParts[2]}, R0" :
+                        $"~\tST {storeParts[1]}, R0";
+                }
+            }
+
+            return returnInstruction;
         }
 
         private void CheckAddInstruction(string[] inputCode, int index)
@@ -43,34 +113,34 @@ namespace Scheduller.Logic
             {
                 if (index >= 1 && IsCertainInstruction(inputCode[index - 1], "MOV"))
                 {
-                    List<string> movOperands = ExtractOperands(inputCode[index - 1]);
-                    List<string> addOperands = ExtractOperands(inputCode[index]);
+                    List<string> movParts = ExtractInstructionWithOperands(inputCode[index - 1]);
+                    List<string> addParts = ExtractInstructionWithOperands(inputCode[index]);
 
-                    if (movOperands[0] == addOperands[1] || movOperands[0] == addOperands[2])
+                    if (movParts[1] == addParts[2] || movParts[1] == addParts[3])
                     {
-                        string newInstruction = GetNewInstruction(movOperands, addOperands);
+                        string newInstruction = GetNewInstructionAdd(movParts, addParts);
                         inputCode[index] = newInstruction;
                     }
                 }
             }
         }
 
-        private string GetNewInstruction(List<string> movOperands, List<string> addOperands)
+        private string GetNewInstructionAdd(List<string> movParts, List<string> addParts)
         {
             string hashtagNumberPattern = @"#(\d+)";
             Regex hashtagRegex = new Regex(hashtagNumberPattern);
 
             string returnInstruction;
-            returnInstruction = $"ADD {addOperands[0]}, {movOperands[1]}, {addOperands[2]}";
+            returnInstruction = $"~\tADD {addParts[1]}, {movParts[2]}, {addParts[3]}";
 
-            Match match1 = hashtagRegex.Match(movOperands[1]);
-            Match match2 = hashtagRegex.Match(addOperands[2]);
+            Match match1 = hashtagRegex.Match(movParts[2]);
+            Match match2 = hashtagRegex.Match(addParts[3]);
 
             if (match1.Success && match2.Success &&
                 int.TryParse(match1.Groups[1].Value, out int number1) &&
                 int.TryParse(match2.Groups[1].Value, out int number2))
             {
-                returnInstruction = $"MOV {addOperands[0]}, #{number1 + number2}";
+                returnInstruction = $"~\tMOV {addParts[1]}, #{number1 + number2}";
             }
 
             return returnInstruction;
@@ -81,7 +151,21 @@ namespace Scheduller.Logic
             return instruction.Trim().StartsWith(instructionName, StringComparison.OrdinalIgnoreCase);
         }
 
-        static List<string> ExtractOperands(string instruction)
+        private bool IsRelationalInstruction(string instruction)
+        {
+            string[] relationalInstructionsName = new string[] { "GT", "LTE", "LT", "GTE" };
+            foreach (var relationalInstruction in relationalInstructionsName)
+            {
+                if(instruction.Trim().StartsWith(relationalInstruction, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        static List<string> ExtractInstructionWithOperands(string instruction)
         {
             string[] parts = instruction.Split();
             List<string> operands = parts.Skip(1).Select(operand => operand.TrimEnd(',')).ToList();

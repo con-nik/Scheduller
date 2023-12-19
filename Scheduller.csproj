@@ -52,8 +52,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\ImmediateMergingTransform.cs" />
     <Compile Include="Logic\ITransform.cs" />
     <Compile Include="Logic\MovMergingTransform.cs" />
+    <Compile Include="Logic\MovReabsorptionTransform.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
