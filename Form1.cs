@@ -49,10 +49,12 @@ namespace Scheduller
 
         private void transformButton_Click(object sender, EventArgs e)
         {
-            /*ITransform movMerging = new MovMergingTransform();
-            movMerging.Transform(inputCode);*/
-
             ITransform movMerging = new MovMergingTransform();
+            movMerging.Transform(inputCode);
+
+            outputTextBox.Lines = inputCode;
+
+            /*ITransform movMerging = new MovMergingTransform();
             string[] transformedCode = movMerging.Transform(inputCode);
 
             string newInstruction = "Noua instructiune";
@@ -73,7 +75,7 @@ namespace Scheduller
             }else if(blue.Checked)
             {
                 SetColorForNewInstruction(newInstruction, Color.DarkBlue);
-            }
+            }*/
         }
         private void SetColorForNewInstruction(string instruction, Color color)
         {
