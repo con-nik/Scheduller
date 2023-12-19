@@ -51,6 +51,7 @@ namespace Scheduller
         {
             string[] codeCopy = inputCode.ToArray();
 
+           
             if (movMergingCheck.Checked)
             {
                 ITransform movMerging = new MovMergingTransform();
@@ -71,36 +72,39 @@ namespace Scheduller
 
             outputTextBox.Lines = codeCopy;
 
-            /*ITransform movMerging = new MovMergingTransform();
-            string[] transformedCode = movMerging.Transform(inputCode);
-
-            string newInstruction = "Noua instructiune";
-           
-            List<string> modifiedCodeList = new List<string>(transformedCode);
-            modifiedCodeList.Add(newInstruction);
-
-            inputCode = modifiedCodeList.ToArray();
-            
-            outputTextBox.Lines = inputCode;
-
-            if (red.Checked)
+            for (int i = 0; i < outputTextBox.Lines.Length; i++)
             {
-                SetColorForNewInstruction(newInstruction, Color.Red);
-            }else if(green.Checked)
-            {
-                SetColorForNewInstruction(newInstruction, Color.DarkGreen);
-            }else if(blue.Checked)
-            {
-                SetColorForNewInstruction(newInstruction, Color.DarkBlue);
-            }*/
+                string line = outputTextBox.Lines[i];
+
+                int tildeIndexSimple = line.IndexOf('~');
+                int tildeIndexDouble = line.IndexOf("~~");
+                int tildeIndexTriple = line.IndexOf("~~~");
+
+                if (tildeIndexSimple != -1 && tildeIndexDouble == -1 && tildeIndexTriple == -1)
+                {
+                    outputTextBox.SelectionStart = outputTextBox.GetFirstCharIndexFromLine(i) + tildeIndexSimple + 1;
+                    outputTextBox.SelectionLength = line.Length - tildeIndexSimple - 1;
+                    outputTextBox.SelectionColor = Color.Red;
+                    outputTextBox.SelectionLength = 0;
+                }
+                else if (tildeIndexDouble != -1 && tildeIndexTriple == -1)
+                {
+                    outputTextBox.SelectionStart = outputTextBox.GetFirstCharIndexFromLine(i) + tildeIndexDouble + 2;
+                    outputTextBox.SelectionLength = line.Length - tildeIndexDouble - 2;
+                    outputTextBox.SelectionColor = Color.Green;
+                    outputTextBox.SelectionLength = 0;
+                }
+                else if (tildeIndexTriple != -1)
+                {
+                    outputTextBox.SelectionStart = outputTextBox.GetFirstCharIndexFromLine(i) + tildeIndexTriple + 3;
+                    outputTextBox.SelectionLength = line.Length - tildeIndexTriple - 3;
+                    outputTextBox.SelectionColor = Color.Blue;
+                    outputTextBox.SelectionLength = 0;
+                }
+
+            }
+
         }
-        private void SetColorForNewInstruction(string instruction, Color color)
-        {
-            int startIndex = outputTextBox.Text.Length - instruction.Length;
-
-            outputTextBox.SelectionStart = startIndex;
-            outputTextBox.SelectionLength = instruction.Length;
-            outputTextBox.SelectionColor = color;
-        }
+       
     }
 }

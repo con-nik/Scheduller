@@ -36,6 +36,7 @@
             this.movMergingCheck = new System.Windows.Forms.CheckBox();
             this.immediateMergingCheck = new System.Windows.Forms.CheckBox();
             this.movReabsorptionCheck = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -44,10 +45,10 @@
             // 
             // addFile
             // 
-            this.addFile.Location = new System.Drawing.Point(31, 580);
-            this.addFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addFile.Location = new System.Drawing.Point(23, 471);
+            this.addFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addFile.Name = "addFile";
-            this.addFile.Size = new System.Drawing.Size(136, 32);
+            this.addFile.Size = new System.Drawing.Size(102, 26);
             this.addFile.TabIndex = 0;
             this.addFile.Text = "Add File";
             this.addFile.UseVisualStyleBackColor = true;
@@ -55,30 +56,30 @@
             // 
             // inputTextBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(31, 30);
-            this.inputTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.inputTextBox.Location = new System.Drawing.Point(23, 24);
+            this.inputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.ReadOnly = true;
-            this.inputTextBox.Size = new System.Drawing.Size(453, 527);
+            this.inputTextBox.Size = new System.Drawing.Size(341, 429);
             this.inputTextBox.TabIndex = 1;
             this.inputTextBox.Text = "";
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(533, 30);
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.outputTextBox.Location = new System.Drawing.Point(400, 24);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.Size = new System.Drawing.Size(447, 527);
+            this.outputTextBox.Size = new System.Drawing.Size(336, 429);
             this.outputTextBox.TabIndex = 2;
             this.outputTextBox.Text = "";
             // 
             // transformButton
             // 
-            this.transformButton.Location = new System.Drawing.Point(184, 580);
-            this.transformButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.transformButton.Location = new System.Drawing.Point(138, 471);
+            this.transformButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.transformButton.Name = "transformButton";
-            this.transformButton.Size = new System.Drawing.Size(136, 32);
+            this.transformButton.Size = new System.Drawing.Size(102, 26);
             this.transformButton.TabIndex = 3;
             this.transformButton.Text = "Transform";
             this.transformButton.UseVisualStyleBackColor = true;
@@ -87,10 +88,9 @@
             // movMergingCheck
             // 
             this.movMergingCheck.AutoSize = true;
-            this.movMergingCheck.Location = new System.Drawing.Point(570, 587);
-            this.movMergingCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.movMergingCheck.Location = new System.Drawing.Point(428, 477);
             this.movMergingCheck.Name = "movMergingCheck";
-            this.movMergingCheck.Size = new System.Drawing.Size(107, 20);
+            this.movMergingCheck.Size = new System.Drawing.Size(88, 17);
             this.movMergingCheck.TabIndex = 4;
             this.movMergingCheck.Text = "Mov Merging";
             this.movMergingCheck.UseVisualStyleBackColor = true;
@@ -98,10 +98,9 @@
             // immediateMergingCheck
             // 
             this.immediateMergingCheck.AutoSize = true;
-            this.immediateMergingCheck.Location = new System.Drawing.Point(685, 587);
-            this.immediateMergingCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.immediateMergingCheck.Location = new System.Drawing.Point(514, 477);
             this.immediateMergingCheck.Name = "immediateMergingCheck";
-            this.immediateMergingCheck.Size = new System.Drawing.Size(144, 20);
+            this.immediateMergingCheck.Size = new System.Drawing.Size(115, 17);
             this.immediateMergingCheck.TabIndex = 5;
             this.immediateMergingCheck.Text = "Immediate Merging";
             this.immediateMergingCheck.UseVisualStyleBackColor = true;
@@ -109,19 +108,28 @@
             // movReabsorptionCheck
             // 
             this.movReabsorptionCheck.AutoSize = true;
-            this.movReabsorptionCheck.Location = new System.Drawing.Point(837, 587);
-            this.movReabsorptionCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.movReabsorptionCheck.Location = new System.Drawing.Point(628, 477);
             this.movReabsorptionCheck.Name = "movReabsorptionCheck";
-            this.movReabsorptionCheck.Size = new System.Drawing.Size(140, 20);
+            this.movReabsorptionCheck.Size = new System.Drawing.Size(113, 17);
             this.movReabsorptionCheck.TabIndex = 6;
             this.movReabsorptionCheck.Text = "Mov Reabsorption";
             this.movReabsorptionCheck.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(392, 500);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(344, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Legend: ~: MovMerging; ~~: ImmediatMerging; ~~~: MovReabsorption";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 642);
+            this.ClientSize = new System.Drawing.Size(764, 522);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.movReabsorptionCheck);
             this.Controls.Add(this.immediateMergingCheck);
             this.Controls.Add(this.movMergingCheck);
@@ -129,7 +137,7 @@
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.addFile);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Scheduller";
             this.ResumeLayout(false);
@@ -147,6 +155,7 @@
         private System.Windows.Forms.CheckBox movMergingCheck;
         private System.Windows.Forms.CheckBox immediateMergingCheck;
         private System.Windows.Forms.CheckBox movReabsorptionCheck;
+        private System.Windows.Forms.Label label1;
     }
 }
 
