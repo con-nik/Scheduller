@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 
@@ -32,9 +34,90 @@ namespace Scheduller.Logic
             return inputCode;
         }
 
-        private void CheckGardInstruction(string[] inputCode, int i)
+        private void CheckGardInstruction(string[] inputCode, int index)
         {
-            return;
+            if(Utils.IsCertainInstruction(inputCode[index], "EQ") || Utils.IsCertainInstruction(inputCode[index], "NE"))
+            {
+                if (index + 1 < inputCode.Length && Utils.IsCertainInstruction(inputCode[index + 1], "TB"))
+                {
+                    List<string> firstInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> secondInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index + 1]);
+
+                    if (secondInstrParts[0].EndsWith(firstInstrParts[1]))
+                    {
+                        if (firstInstrParts[2] == "R0" && firstInstrParts[3] =="R0")
+                        {
+                            if (firstInstrParts[0] == "EQ")
+                            {
+                                inputCode[index + 1] = $"~\t{secondInstrParts[1]} {secondInstrParts[2]}, {secondInstrParts[3]}, {secondInstrParts[4]}";
+                            }
+                            if (firstInstrParts[0] == "NE")
+                            {
+                                inputCode[index + 1] = $"~\tNOP";
+                            }
+                        }
+                        
+                    }
+                }
+            }
+
+            if (Utils.IsCertainInstruction(inputCode[index], "EQ") || Utils.IsCertainInstruction(inputCode[index], "NE"))
+            {
+                if (index + 1 < inputCode.Length && Utils.IsCertainInstruction(inputCode[index + 1], "BT"))
+                {
+                    List<string> firstInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> secondInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index + 1]);
+
+                    if (firstInstrParts[1] == secondInstrParts[1])
+                    {
+                        if (firstInstrParts[2] == firstInstrParts[3])
+                        {
+                            if (firstInstrParts[0] == "EQ")
+                            {
+                                inputCode[index+1] = $"~\tBRA {secondInstrParts[2]}";
+                            }
+                            if (firstInstrParts[0] == "NE")
+                            {
+                                inputCode[index+1] = $"~\t{firstInstrParts[0]} {firstInstrParts[1]}, {firstInstrParts[2]}, {firstInstrParts[3]}";
+                            }
+
+                            for (int i = index; i < inputCode.Length - 1; i++)
+                            {
+                                inputCode[i] = inputCode[i + 1];
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (Utils.IsCertainInstruction(inputCode[index], "MOV"))
+            {
+                if (index + 1 < inputCode.Length && Utils.IsCertainInstruction(inputCode[index + 1], "TB"))
+                {
+                    List<string> firstInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> secondInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index + 1]);
+                    if (secondInstrParts[0].EndsWith(firstInstrParts[1]))
+                    {
+                        inputCode[index + 1] = $"~\tT{firstInstrParts[2]} {secondInstrParts[1]}";
+                        for (int i = 2; i < secondInstrParts.Count; i++)
+                        {
+                            inputCode[index + 1] += $" {secondInstrParts[i]},"; 
+                        }
+                        inputCode[index + 1] = inputCode[index + 1].Substring(0, inputCode[index + 1].Length - 3);
+                    }
+                }
+            }
+
+            if (Utils.IsCertainInstruction(inputCode[index], "MOV"))
+            {
+                if (index + 1 < inputCode.Length && Utils.IsCertainInstruction(inputCode[index + 1], "BT"))
+                {
+                    List<string> firstInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index]);
+                    List<string> secondInstrParts = Utils.ExtractInstructionWithOperands(inputCode[index + 1]);
+
+                    inputCode[index + 1] = $"~\tBT {firstInstrParts[2]}, {secondInstrParts[2]}";
+                }
+            }
         }
 
         private void CheckRelationalInstruction(string[] inputCode, int index)

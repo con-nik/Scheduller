@@ -51,6 +51,10 @@ namespace Scheduller
         {
             string[] codeCopy = inputCode.ToArray();
 
+            if (codeCopy[0] == null)
+            {
+                return;
+            }
            
             if (movMergingCheck.Checked)
             {

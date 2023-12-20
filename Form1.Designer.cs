@@ -36,7 +36,6 @@
             this.movMergingCheck = new System.Windows.Forms.CheckBox();
             this.immediateMergingCheck = new System.Windows.Forms.CheckBox();
             this.movReabsorptionCheck = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -88,8 +87,9 @@
             // movMergingCheck
             // 
             this.movMergingCheck.AutoSize = true;
+            this.movMergingCheck.ForeColor = System.Drawing.Color.Red;
             this.movMergingCheck.Location = new System.Drawing.Point(571, 587);
-            this.movMergingCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.movMergingCheck.Margin = new System.Windows.Forms.Padding(4);
             this.movMergingCheck.Name = "movMergingCheck";
             this.movMergingCheck.Size = new System.Drawing.Size(107, 20);
             this.movMergingCheck.TabIndex = 4;
@@ -99,8 +99,9 @@
             // immediateMergingCheck
             // 
             this.immediateMergingCheck.AutoSize = true;
+            this.immediateMergingCheck.ForeColor = System.Drawing.Color.Green;
             this.immediateMergingCheck.Location = new System.Drawing.Point(685, 587);
-            this.immediateMergingCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.immediateMergingCheck.Margin = new System.Windows.Forms.Padding(4);
             this.immediateMergingCheck.Name = "immediateMergingCheck";
             this.immediateMergingCheck.Size = new System.Drawing.Size(144, 20);
             this.immediateMergingCheck.TabIndex = 5;
@@ -110,30 +111,20 @@
             // movReabsorptionCheck
             // 
             this.movReabsorptionCheck.AutoSize = true;
+            this.movReabsorptionCheck.ForeColor = System.Drawing.Color.Blue;
             this.movReabsorptionCheck.Location = new System.Drawing.Point(837, 587);
-            this.movReabsorptionCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.movReabsorptionCheck.Margin = new System.Windows.Forms.Padding(4);
             this.movReabsorptionCheck.Name = "movReabsorptionCheck";
             this.movReabsorptionCheck.Size = new System.Drawing.Size(140, 20);
             this.movReabsorptionCheck.TabIndex = 6;
             this.movReabsorptionCheck.Text = "Mov Reabsorption";
             this.movReabsorptionCheck.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(523, 615);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(466, 16);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Legend: Red: MovMerging; Green: ImmediatMerging; Blue: MovReabsorption";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 642);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1019, 634);
             this.Controls.Add(this.movReabsorptionCheck);
             this.Controls.Add(this.immediateMergingCheck);
             this.Controls.Add(this.movMergingCheck);
@@ -159,7 +150,6 @@
         private System.Windows.Forms.CheckBox movMergingCheck;
         private System.Windows.Forms.CheckBox immediateMergingCheck;
         private System.Windows.Forms.CheckBox movReabsorptionCheck;
-        private System.Windows.Forms.Label label1;
     }
 }
 
